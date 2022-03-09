@@ -1,0 +1,13 @@
+name: GitHub Actions Release Demo
+
+on: [push]
+
+jobs:
+  Get latest github release:
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v2
+    - name: Get release
+      run: echo "GITHUB_RELEASE=${GITHUB_REF#refs/*/}"
+    - name: Release Version
+      run: echo $GITHUB_RELEASE
