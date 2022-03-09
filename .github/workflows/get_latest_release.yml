@@ -3,7 +3,7 @@ name: GitHub Actions Release Demo
 on: [push]
 
 jobs:
-  Get latest github release:
+  get-latest-github-release:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
