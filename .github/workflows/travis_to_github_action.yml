@@ -1,6 +1,6 @@
 name: PR Action
 
-on: [push]
+#on: [push]
 
 jobs:
     PR Check:
