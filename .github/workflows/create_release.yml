@@ -29,10 +29,9 @@ jobs:
           echo $branch
           echo $GITHUB_ENV
           echo $BRANCH
+          echo if: env.BRANCH == 'prod'
 
       - name: Create Release
-        run: |
-          echo if: env.BRANCH == 'prod'
         if: env.BRANCH == 'prod'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
