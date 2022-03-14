@@ -2,8 +2,10 @@ name: Release Creation
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - prod
+      tags:
+        - "v*"
 
 jobs:
   build:
