@@ -20,4 +20,4 @@ jobs:
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw/origin\/}
           echo $branch
-          echo ${{ github.ref##/ }}
+          echo ${github.ref/refs\/tags\//}
