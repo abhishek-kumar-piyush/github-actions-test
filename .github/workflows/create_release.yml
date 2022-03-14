@@ -20,8 +20,8 @@ jobs:
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw/origin\/}
           echo $branch
-          echo ::set-env name=BRANCH::$branch
-          echo ::set-env tag=TAG::${GITHUB_REF#refs/tags/}
+          echo "BRANCH=$branch" >> $GITHUB_ENV
+          echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
       - name: Create Release
         if: env.BRANCH == 'prod'
