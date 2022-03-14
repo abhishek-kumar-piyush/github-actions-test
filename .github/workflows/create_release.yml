@@ -21,11 +21,3 @@ jobs:
           branch=${raw/origin\/}
           echo $branch
           echo ${{ github.ref##/ }}
-
-      - name: Create Release
-        if: branch == 'prod':
-        uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: ${{ github.ref }}
-          prerelease: false
