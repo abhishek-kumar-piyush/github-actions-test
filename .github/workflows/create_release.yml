@@ -1,4 +1,4 @@
-name: Releases
+name: Release Creation
 
 on:
   push:
@@ -15,9 +15,8 @@ jobs:
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          prerelease: false
           automatic_release_tag: ${{ github.ref }}
           title: Release ${{ github.ref }}
           files: |
-            LICENSE.txt
             *.jar
+          prerelease: false
