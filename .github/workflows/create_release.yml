@@ -20,12 +20,14 @@ jobs:
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw/origin\/}
           echo $branch
-          echo ${GITHUB_REF#refs/tags/}
+          echo ::set-env name=BRANCH::$branch
+          echo ::set-env tag=TAG::${GITHUB_REF#refs/tags/}
 
       - name: Create Release
+        if: env.BRANCH == 'prod'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: ${{ github.ref }}
-          title: Release ${{ GITHUB_REF#refs/tags/ }}
+          title: Release ${{ env.TAG }}
           prerelease: false
