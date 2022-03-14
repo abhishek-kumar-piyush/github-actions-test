@@ -21,8 +21,9 @@ jobs:
           echo $branch
           echo ${{ github.ref##/ }}
 
-      if: steps.get_branch.branch == 'prod':
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Create Release
+        if: steps.get_branch.branch == 'prod':
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: ${{ github.ref }}
