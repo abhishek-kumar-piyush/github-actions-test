@@ -32,7 +32,7 @@ jobs:
           echo ${{ env.BRANCH == 'prod' }}
 
       - name: Create Release
-        if: env.BRANCH = 'prod'
+        if: env.BRANCH == 'prod'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
