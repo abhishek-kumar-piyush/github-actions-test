@@ -12,11 +12,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Build Changelog
+      - name: Create Release Notes
         id: github_release
-        uses: mikepenz/release-changelog-builder-action@v1
+        uses: docker://decathlon/release-notes-generator-action:2.0.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          OUTPUT_FOLDER: temp_release_notes
+        #uses: mikepenz/release-changelog-builder-action@v1
+        #env:
+        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Release
         id: create_release
@@ -26,7 +30,8 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: "This is a test body and it has nothing to do with release"
+          body: temp_release_notes
+          #body: "This is a test body and it has nothing to do with release"
           #body: ${{steps.github_release.outputs.changelog}}
           default: false
           prerelease: false
