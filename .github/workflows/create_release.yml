@@ -12,27 +12,12 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Create Release Notes
-        id: github_release
-        uses: docker://decathlon/release-notes-generator-action:2.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          OUTPUT_FOLDER: temp_release_notes
-          USE_MILESTONE_TITLE: "false"
-        #uses: mikepenz/release-changelog-builder-action@v1
-        #env:
-        #  GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - name: Create Release
-        id: create_release
-        uses: actions/create-release@latest
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          tag_name: ${{ github.ref }}
-          release_name: Release ${{ github.ref }}
-          body: temp_release_notes
-          #body: "This is a test body and it has nothing to do with release"
-          #body: ${{steps.github_release.outputs.changelog}}
-          default: false
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
           prerelease: false
+          automatic_release_tag: ${{ github.ref }}
+          title: Release ${{ github.ref }}
+          files: |
+            LICENSE.txt
+            *.jar
