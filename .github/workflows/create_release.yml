@@ -22,6 +22,7 @@ jobs:
           echo $branch
           echo "BRANCH=$branch" >> $GITHUB_ENV
           echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+          echo $GITHUB_ENV
 
       - name: Create Release
         if: env.BRANCH == 'prod'
