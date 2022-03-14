@@ -31,10 +31,10 @@ jobs:
           echo $BRANCH
 
       - name: Create Release
-        if: env.BRANCH == 'prod'
+        if: BRANCH == 'prod'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: ${{ github.ref }}
-          title: Release ${{ env.TAG }}
+          title: Release ${{ TAG }}
           prerelease: false
