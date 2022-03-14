@@ -24,15 +24,15 @@ jobs:
           echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
           echo $GITHUB_ENV
 
-#      - name: Print something
-#        run: |
-#          echo $branch
-#          echo $GITHUB_ENV
-#          echo $BRANCH
-#          echo $env.BRANCH == 'prod'
+      - name: Print something
+        run: |
+          echo $branch
+          echo $GITHUB_ENV
+          echo $BRANCH
+          echo ${{ env.BRANCH == 'prod' }}
 
       - name: Create Release
-        if: {(git branch -r --contains ${{ github.ref }})/origin\/} == 'prod'
+        if: env.BRANCH = 'prod'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
