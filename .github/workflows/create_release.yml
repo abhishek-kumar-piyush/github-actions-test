@@ -8,6 +8,8 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    code: |
+      echo  ${{ github.ref }}
     if: github.ref == 'refs/heads/prod'
     steps:
       - name: Checkout code
