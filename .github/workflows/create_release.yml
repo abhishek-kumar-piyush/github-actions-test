@@ -7,7 +7,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/prod'
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
