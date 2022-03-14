@@ -29,6 +29,7 @@ jobs:
           echo $branch
           echo $GITHUB_ENV
           echo $BRANCH
+          echo ${{ env.BRANCH }}
           echo ${{ env.BRANCH == 'prod' }}
 
       - name: Create Release
