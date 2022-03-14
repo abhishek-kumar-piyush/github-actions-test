@@ -32,7 +32,7 @@ jobs:
 #          echo $env.BRANCH == 'prod'
 
       - name: Create Release
-        if: env.BRANCH == 'prod'
+        if: {(git branch -r --contains ${{ github.ref }})/origin\/} == 'prod'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
