@@ -26,6 +26,7 @@ jobs:
         with:
           tag_name: ${{ github.ref }}
           release_name: Release ${{ github.ref }}
-          body: ${{steps.github_release.outputs.changelog}}
+          body: "This is a test body and it has nothing to do with release"
+          #body: ${{steps.github_release.outputs.changelog}}
           default: false
           prerelease: false
