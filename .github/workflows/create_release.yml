@@ -25,7 +25,10 @@ jobs:
           echo $GITHUB_ENV
 
       - name: Create Release
-        if: env.BRANCH == 'prod'
+        run: |
+          echo $env.BRANCH
+          echo $env.TAG
+        if: $env.BRANCH == 'prod'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
