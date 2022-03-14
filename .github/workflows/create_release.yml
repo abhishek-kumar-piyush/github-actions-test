@@ -14,11 +14,14 @@ jobs:
           fetch-depth: 0
 
       - name: Get Branch
+        id: get_branch
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw/origin\/}
           echo $branch
+          echo ${{ github.ref##/ }}
 
+      if: steps.get_branch.branch == 'prod':
       - uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
