@@ -31,7 +31,9 @@ jobs:
           echo $BRANCH
 
       - name: Create Release
-        if: ${{ BRANCH == 'prod' }}
+        run: |
+          echo if: env.BRANCH == 'prod'
+        if: env.BRANCH == 'prod'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
