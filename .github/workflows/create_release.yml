@@ -14,23 +14,13 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Get Branch
+      - name: Set Branch and Tag
         id: get_branch
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw/origin\/}
-          echo $branch
           echo "BRANCH=$branch" >> $GITHUB_ENV
           echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-          echo $GITHUB_ENV
-
-      - name: Print something
-        run: |
-          echo $branch
-          echo $GITHUB_ENV
-          echo $BRANCH
-          echo ${{ env.BRANCH }}
-          echo ${{ contains(env.BRANCH,  'prod') }}
 
       - name: Create Release
         if: contains(env.BRANCH, 'prod')
