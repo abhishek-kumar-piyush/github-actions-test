@@ -27,5 +27,5 @@ jobs:
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: ${{ github.ref }}
-          title: Release ${GITHUB_REF#refs/tags/}
+          title: Release ${{ GITHUB_REF#refs/tags/ }}
           prerelease: false
