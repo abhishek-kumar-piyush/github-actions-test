@@ -24,10 +24,13 @@ jobs:
           echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
           echo $GITHUB_ENV
 
-      - name: Create Release
+      - name: Print something
         run: |
+          echo $branch
+          echo $GITHUB_ENV
           echo $env.BRANCH
-          echo $env.TAG
+
+      - name: Create Release
         if: $env.BRANCH == 'prod'
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
