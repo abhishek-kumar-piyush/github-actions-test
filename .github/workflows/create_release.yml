@@ -2,7 +2,7 @@ name: Release Creation
 
 on:
   push:
-    if: tags: "v*"
+    tags: ["v*"]
 
 jobs:
   build:
