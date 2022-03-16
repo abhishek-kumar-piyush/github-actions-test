@@ -2,8 +2,8 @@ name: Release Creation
 
 on:
   push:
-    tags:
-      - "v*"
+    branches:
+      - prod
 
 jobs:
   build:
@@ -14,19 +14,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Set Branch and Tag
-        id: get_branch
-        run: |
-          raw=$(git branch -r --contains ${{ github.ref }})
-          branch=${raw/origin\/}
-          echo "BRANCH=$branch" >> $GITHUB_ENV
-          echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+      - uses: Klemensas/action-autotag@stable
+        id: tag_version
+        with:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          tag_prefix: "v"
 
       - name: Create Release
-        if: contains(env.BRANCH, 'prod')
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          automatic_release_tag: ${{ github.ref }}
-          title: Release ${{ env.TAG }}
+          automatic_release_tag: ${{ steps.tag_version.outputs.tagname }}
+          title: Release ${{ steps.tag_version.outputs.tagname }}
           prerelease: false
