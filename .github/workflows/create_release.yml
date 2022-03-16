@@ -2,10 +2,8 @@ name: Release Creation
 
 on:
   push:
-    branches:
-      - prod
-      tags:
-        - "v*"
+    tags:
+      - "v*"
 
 jobs:
   build:
@@ -13,10 +11,22 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
 
-      - uses: "marvinpinto/action-automatic-releases@latest"
+      - name: Set Branch and Tag
+        id: get_branch
+        run: |
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=${raw/origin\/}
+          echo "BRANCH=$branch" >> $GITHUB_ENV
+          echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
+
+      - name: Create Release
+        if: contains(env.BRANCH, 'prod')
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           automatic_release_tag: ${{ github.ref }}
-          title: Release ${{ automatic_release_tag }}
+          title: Release ${{ env.TAG }}
           prerelease: false
