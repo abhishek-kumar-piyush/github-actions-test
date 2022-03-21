@@ -1,13 +1,5 @@
-"""
-Github action to
-1. Gets triggered when a new tag is created/pushed
-2. Create release and name it 'Release <tag_name>'
-3. Auto generate release notes
-"""
-
 name: Release Creation
 
-# Trigger action when tag starting with "v" is pushed
 on:
   push:
     tags:
@@ -22,14 +14,12 @@ jobs:
         with:
           fetch-depth: 0
 
-      # Set Branch name and Tag name in environment variables
       - name: Set Branch and Tag
         run: |
           raw=$(git branch -r --contains ${{ github.ref }})
           branch=${raw/origin\/}
           echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
-      # Create Release and auto generate release note, only when branch name is prod
       - name: Create Release
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
