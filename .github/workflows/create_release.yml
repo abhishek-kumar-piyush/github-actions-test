@@ -1,9 +1,17 @@
+"""
+Github action to
+1. Gets triggered when a new tag is created/pushed
+2. Create release and name it 'Release <tag_name>'
+3. Auto generate release notes
+"""
+
 name: Release Creation
 
+# Trigger action when tag starting with "v" is pushed
 on:
   push:
-    branches:
-      - prod
+    tags:
+      - "v*"
 
 jobs:
   build:
@@ -14,26 +22,18 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: butlerlogic/action-autotag@stable
-        id: tag_version
-        with:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          strategy: docker
-          tag_prefix: "v"
+      # Set Branch name and Tag name in environment variables
+      - name: Set Branch and Tag
+        run: |
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=${raw/origin\/}
+          echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
-      - name: Build changelog
-        id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
+      # Create Release and auto generate release note, only when branch name is prod
       - name: Create Release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          tag_name: ${{ steps.tag_version.outputs.tagname }}
-          release_name: Release ${{ steps.tag_version.outputs.tagname }}
-          body: ${{ steps.build_changelog.outputs.changelog }}
-          draft: false
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: ${{ github.ref }}
+          title: Release ${{ env.TAG }}
           prerelease: false
