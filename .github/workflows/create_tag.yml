@@ -1,0 +1,30 @@
+name: Create Tag
+
+on:
+  push:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+    - uses: butlerlogic/action-autotag@stable
+      id: tag_version
+      with:
+        GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+        strategy: docker
+        tag_prefix: "v"
+
+    - name: Print tag
+      run: |
+        echo "${{ steps.tag_version.outputs.tagname }}"
+
+    - name: Build changelog
+      id: build_changelog
+      uses: mikepenz/release-changelog-builder-action@main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Print Change Catalog
+      run: |
+        echo "${{ steps.build_changelog.outputs.changelog }}"
