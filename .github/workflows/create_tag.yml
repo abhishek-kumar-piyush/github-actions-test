@@ -8,16 +8,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: butlerlogic/action-autotag@stable
-        id: tag_version
-        with:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          strategy: docker
-          tag_prefix: "v"
-
-      - name: Print tag
-        run: |
-          echo "${{ steps.tag_version.outputs.tagname }}"
+#      - uses: butlerlogic/action-autotag@stable
+#        id: tag_version
+#        with:
+#          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+#          strategy: docker
+#          tag_prefix: "v"
+#
+#      - name: Print tag
+#        run: |
+#          echo "${{ steps.tag_version.outputs.tagname }}"
 
       - name: Build changelog
         id: build_changelog
@@ -26,6 +26,7 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           fromTag: "v1.0.1"
+          toTag: "v1.0.70"
 
       - name: Print Change Catalog
         run: |
