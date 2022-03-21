@@ -26,7 +26,9 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           fromTag: "v1.0.1"
-          toTag: "v1.0.70"
+          toTag: "v1.0.65"
+        run: |
+          echo ${{steps.build_changelog.outputs.changelog}}
 
       - name: Print Change Catalog
         run: |
