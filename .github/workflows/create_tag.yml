@@ -1,7 +1,7 @@
 name: Create Tag
 
-#on:
-#  push:
+on:
+  push:
 
 jobs:
   build:
