@@ -1,12 +1,13 @@
 name: Release Creation
 
 on:
-  push:
-    branches:
-      - prod
+  create:
+    tag:
+      - "v*"
 
 jobs:
   build:
+    if: ${{ startsWith(github.ref, 'refs/tags/v') }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
@@ -14,24 +15,16 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: butlerlogic/action-autotag@stable
-        id: tag_version
-        with:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          strategy: docker
-          tag_prefix: "v"
-
-      - name: Build changelog
-        id: build_changelog
-        uses: mikepenz/release-changelog-builder-action@main
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Set Branch and Tag
+        run: |
+          raw=$(git branch -r --contains ${{ github.ref }})
+          branch=${raw/origin\/}
+          echo "TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
       - name: Create Release
-        uses: actions/create-release@v1
+        uses: "marvinpinto/action-automatic-releases@latest"
         with:
-          tag_name: ${{ steps.tag_version.outputs.tagname }}
-          release_name: Release ${{ steps.tag_version.outputs.tagname }}
-          body: ${{ steps.build_changelog.outputs.changelog }}
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          automatic_release_tag: ${{ github.ref }}
+          title: Release ${{ env.TAG }}
+          prerelease: false
