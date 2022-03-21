@@ -15,6 +15,16 @@ jobs:
         strategy: docker
         tag_prefix: "v"
 
-    - name: print tag
+    - name: Print tag
       run: |
         echo "${{ steps.tag_version.outputs.tagname }}"
+
+    - name: Build changelog
+      id: build_changelog
+      uses: mikepenz/release-changelog-builder-action@main
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    - name: Print Change Catalog
+      run: |
+        echo "${{ steps.build_changelog.outputs.changelog }}"
