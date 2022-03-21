@@ -20,3 +20,4 @@ jobs:
       - name: Print tag
         run: |
           echo "${{ steps.tag_version.outputs.tagname }}"
+          echo "${{ github.ref }}"
