@@ -22,4 +22,4 @@ RUN apk del .build-deps
 EXPOSE 8080
 ENTRYPOINT ["bash", "/code/docker-entrypoint.sh"]
 
-LABEL version="1.0.68"
+LABEL version="1.0.69"
