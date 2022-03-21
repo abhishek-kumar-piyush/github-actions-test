@@ -1,9 +1,9 @@
 name: Release Creation
 
 on:
-  create:
-    tag:
-      - "v*"
+  push:
+    branches:
+      - prod
 
 jobs:
   build:
