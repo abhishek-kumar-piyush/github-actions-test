@@ -1,7 +1,7 @@
 name: Release Creation
 
 on:
-  create:
+  create
 
 jobs:
   build:
