@@ -11,9 +11,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+          uses: actions/checkout@v2
+          with:
+            fetch-depth: 0
+
+      - uses: butlerlogic/action-autotag@stable
+        id: tag_version
         with:
-          fetch-depth: 0
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          strategy: docker
+          tag_prefix: "v"
 
       - name: Set Branch and Tag
         run: |
