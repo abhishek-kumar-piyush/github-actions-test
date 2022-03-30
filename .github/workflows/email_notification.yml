@@ -26,11 +26,11 @@ jobs:
           # Required recipients' addresses:
           to: abhishek.kumar@ajackus.com
           # Required sender full name (address can be skipped):
-          from: akpiyush437@gmail.com
+          from: Abhishek Kumar Piyush
           # Optional whether this connection use TLS (default is true if server_port is 465)
           secure: true
           # Optional plain body:
-          body: Docker image created and pushed to GCP successfully
+          body: Release created and Docker Image pushed to Google Container Registry
           # Optional recipient of the email response:
           reply_to: akpiyush437@gmail.com
           # Optional unsigned/invalid certificates allowance:
