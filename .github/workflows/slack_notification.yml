@@ -8,7 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Slack Notification
-      uses: rtCamp/action-slack-notify@v2
+    - name: Slack notification
       env:
         SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
+      uses: Ilshidur/action-slack@2.0.2
+      with:
+        args: 'A new msg from github actions'
