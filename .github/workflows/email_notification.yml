@@ -16,18 +16,20 @@ jobs:
           server_address: smtp.gmail.com
           # Required mail server port:
           server_port: 465
+          # Optional (recommended): mail server username:
+          username: ${{ secrets.MAIL_USERNAME }}
+          # Optional (recommended) mail server password:
+          password: ${{ secrets.MAIL_PASSWORD }}
           # Required mail subject:
           subject: Github Actions job alert
           # Required recipients' addresses:
           to: abhishek.kumar@ajackus.com
           # Required sender full name (address can be skipped):
-          from: Luke Skywalker # <user@example.com>
+          from: akpiyush437@gmail.com
           # Optional whether this connection use TLS (default is true if server_port is 465)
           secure: true
           # Optional plain body:
           body: Docker image created and pushed to GCP successfully
-          # Optional HTML body read from file:
-          html_body: file://README.html
           # Optional recipient of the email response:
           reply_to: akpiyush437@gmail.com
           # Optional unsigned/invalid certificates allowance:
