@@ -28,16 +28,10 @@ jobs:
           # Required recipients' addresses:
           to: abhishek.kumar@ajackus.com
           # Required sender full name (address can be skipped):
-          from: Abhishek Kumar Piyush
+          from: Abhishek Kumar <abhishek.kumar@ajackus.com>
           # Optional whether this connection use TLS (default is true if server_port is 465)
           secure: true
           # Optional plain body:
           body: Release created and Docker Image pushed to Google Container Registry
           # Optional recipient of the email response:
           reply_to: abhishek.kumar@ajackus.com
-          # Optional unsigned/invalid certificates allowance:
-          ignore_cert: true
-          # Optional converting Markdown to HTML (set content_type to text/html too):
-          convert_markdown: true
-          # Optional priority: 'high', 'normal' (default) or 'low'
-          priority: low
