@@ -1,6 +1,7 @@
 name: Email Alert
 
-on: push
+on:
+  push
 
 jobs:
   EmailNotification:
