@@ -8,9 +8,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-    - name: Slack notification
+    - name: Notify slack
       env:
-        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
-      uses: Ilshidur/action-slack@2.0.2
+        SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
+      uses: pullreminders/slack-action@master
       with:
-        args: 'A new msg from github actions'
+        args: '{\"channel\":\"C0396L08D53\",\"text\":\"Hello world\"}'
