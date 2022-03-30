@@ -11,5 +11,4 @@ jobs:
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
       env:
-        SLACK_WEBHOOK: https://hooks.slack.com/services/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
-        SLACK_MESSAGE: "Hi, this msg is generated from github actions"
+        SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
