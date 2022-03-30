@@ -4,10 +4,11 @@ on: push
 
 jobs:
   slackNotification:
-    name: Slack Notification
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
+    - name: Checkout latest code
+      uses: actions/checkout@v2
+
     - name: Slack Notification
       uses: rtCamp/action-slack-notify@v2
       env:
