@@ -2,8 +2,8 @@
 
 name: Email Alert
 
-# on:
-#   push
+on:
+  push
 
 jobs:
   EmailNotification:
@@ -26,9 +26,9 @@ jobs:
           # Required mail subject:
           subject: Github Actions job alert
           # Required recipients' addresses:
-          to: abhishek.kumar@ajackus.com
+          to: ${{ secrets.RECIPIENT_EMAIL }}
           # Required sender full name (address can be skipped):
-          from: Abhishek Kumar <abhishek.kumar@ajackus.com>
+          from: ${{ secrets.SENDER_EMAIL }}
           # Optional whether this connection use TLS (default is true if server_port is 465)
           secure: true
           # Optional plain body:

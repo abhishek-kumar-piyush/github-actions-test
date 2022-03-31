@@ -3,7 +3,7 @@
 # Github action to push Slack notifications
 name: Slack Notification
 
-on: push
+# on: push
 
 jobs:
   slackNotification:
