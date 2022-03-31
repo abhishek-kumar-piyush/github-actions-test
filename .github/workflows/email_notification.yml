@@ -34,4 +34,4 @@ jobs:
           # Optional plain body:
           body: Release created and Docker Image pushed to Google Container Registry
           # Optional recipient of the email response:
-          reply_to: abhishek.kumar@ajackus.com
+          reply_to: ${{ secrets.SENDER_EMAIL }}
