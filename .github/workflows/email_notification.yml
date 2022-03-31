@@ -1,0 +1,37 @@
+# Reference: https://github.com/dawidd6/action-send-mail
+
+name: Email Alert
+
+on:
+  push
+
+jobs:
+  EmailNotification:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Send mail
+        uses: dawidd6/action-send-mail@v3
+        with:
+          # Required mail server address:
+          server_address: smtp.gmail.com
+          # Required mail server port:
+          server_port: 465
+          # Optional (recommended): mail server username:
+          username: ${{ secrets.MAIL_USERNAME }}
+          # Optional (recommended) mail server password:
+          password: ${{ secrets.MAIL_PASSWORD }}
+          # Required mail subject:
+          subject: Github Actions job alert
+          # Required recipients' addresses:
+          to: abhishek.kumar@ajackus.com
+          # Required sender full name (address can be skipped):
+          from: Abhishek Kumar <abhishek.kumar@ajackus.com>
+          # Optional whether this connection use TLS (default is true if server_port is 465)
+          secure: true
+          # Optional plain body:
+          body: Release created and Docker Image pushed to Google Container Registry
+          # Optional recipient of the email response:
+          reply_to: abhishek.kumar@ajackus.com

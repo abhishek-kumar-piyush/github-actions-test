@@ -1,9 +1,9 @@
 name: Create Tag
 
-on:
-  push:
-    branches:
-      - prod
+#on:
+#  push:
+#    branches:
+#      - prod
 
 jobs:
   build:
