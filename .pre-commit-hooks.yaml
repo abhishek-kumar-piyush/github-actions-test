@@ -1,4 +1,4 @@
 - repo: local
   hooks:
     - id: no-commit-to-branch
-      args: ['--branch', 'prod']
+      args: [--branch, prod]
