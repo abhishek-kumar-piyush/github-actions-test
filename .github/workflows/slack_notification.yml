@@ -1,5 +1,6 @@
 # Reference: https://github.com/marketplace/actions/slack-notify
 
+# Github action to push Slack notifications
 name: Slack Notification
 
 on: push
