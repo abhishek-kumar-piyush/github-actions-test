@@ -1,4 +1,4 @@
-- repo: https://github.com/pre-commit/pre-commit-hooks
+- repo: local
   hooks:
     - id: no-commit-to-branch
       args: ['--branch', 'prod']
