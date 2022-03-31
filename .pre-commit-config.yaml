@@ -3,4 +3,4 @@ repos:
   rev: v4.0.1
   hooks:
     - id: no-commit-to-branch
-      args: [--branch, prod]
+      args: [--branch, prod, --branch, demo, --branch, dev]
